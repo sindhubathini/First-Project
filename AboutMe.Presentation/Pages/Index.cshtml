@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>My Name Is <input type="text" readonly id="txtName" /></p>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        $.ajax({
+            url: "https://localhost:44338/Home",
+            type: "GET",
+            success: function (data) {
+                if (data != null) {
+                    var obj = JSON.stringify(data);
+                    var res = JSON.parse(obj);
+                    $('#txtName').val(res.name);
+                }
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
